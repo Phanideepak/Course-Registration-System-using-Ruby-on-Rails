@@ -1,0 +1,14 @@
+<h1>Hi there,<br>
+Welcome to SAP</h1>
+<p>
+	
+</p>
+<% if current_user %>
+	
+<% end %>
+<% if student? %>
+	<%= link_to "Your Courses", :controller => "registrations", :action => "list" %>
+<% elsif admin? %>
+	
+<% end %>
+	

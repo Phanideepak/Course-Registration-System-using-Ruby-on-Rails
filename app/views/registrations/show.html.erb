@@ -1,0 +1,17 @@
+<p>
+  <strong>Course Name:</strong>
+  <%= Course.find(@registration.c_id).name %>
+</p>
+
+<p>
+  <strong>Student Name:</strong>
+  <%= User.find(@registration.s_id).name %>
+</p>
+
+<p>
+  <strong>Grade:</strong>
+  <%= @registration.grade %>
+</p>
+
+<%= link_to 'Edit', edit_registration_path(@registration) %> |
+<%= link_to 'Back', registrations_path %>

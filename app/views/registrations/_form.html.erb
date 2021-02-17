@@ -1,0 +1,38 @@
+<% if @registration.errors.any? %>
+
+  <div class="alert alert-danger" role="alert">
+
+    <h4 class="alert-heading">Errors in your registration!!</h4>
+
+    <p>You cannot register to a course more than once. Please check this and re-submit your form. If the error persists contact the administrator</p>
+
+    <hr>
+
+    <p class="mb-0">These error messages might be helpful:
+      <ul>
+        <% @registration.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </p>
+
+  </div>
+
+<% end %>
+
+<%= form_with(model: registration, local: true) do |form| %>
+  <% unless admin? %>
+    <%= select_tag "c_id", options_from_collection_for_select(Course.all, "id","name"), :prompt => "Select the course" %>
+  <% end %>
+
+  <% if admin? %>
+    <div class="field">
+      <%= form.label :grade %>
+      <%= form.number_field :grade %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,6 @@
+<%= form_for(@user) do |f| %>  
+  <%= f.text_field :name, :placeholder => "Name(Unique Username)" %> 
+  <%= f.password_field :password, :placeholder => "Password(min 8 characters)" %> 
+  <%= f.select :type_of_users, ['Student', 'Admin']%>
+  <%= f.submit "Signup", class: "btn-submit" %>
+<% end %>

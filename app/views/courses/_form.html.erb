@@ -1,0 +1,30 @@
+<% if @course.errors.any? %>
+<div class="alert alert-danger">
+  <h1>ERRORS IN CREATING A NEW COURSE</h1>
+  <ul>
+    <li>Check if all the required attributes are filled</li>
+  </ul>
+</div>
+<ul>
+  <% @course.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= form_with(model: course, local: true) do |form| %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :credits %>
+    <%= form.number_field :credits %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

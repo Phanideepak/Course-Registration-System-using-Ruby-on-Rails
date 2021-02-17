@@ -1,0 +1,44 @@
+<h1>Registrations</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Course Name</th>
+      <th>Student Name</th>
+      <th>Grade</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @registrations.each do |registration| %>
+
+        <tr>
+          <td><%= Course.find(registration.c_id).name %></td>
+          <td><%= User.find(registration.s_id).name %></td>
+
+          <% unless registration.grade.nil? %>
+            <td><%= registration.grade %></td>
+          <% else %>
+            <td>To be declared</td>
+          <% end %>
+
+          <% if Course.find(registration.c_id).admin == current_user.id %>
+
+            <% if registration.grade.nil? %>
+              <td><%= link_to 'Give Grade', edit_registration_path(registration) %></td>
+            <% else %>
+              <td><%= link_to 'Update Grade', edit_registration_path(registration) %></td>
+            <% end %>
+            <td><%= link_to 'Remove Student', registration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+          <% end %>
+          
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% unless admin? %>
+  <%= link_to 'New Registration', "/registrations/new" %>
+<% end %>

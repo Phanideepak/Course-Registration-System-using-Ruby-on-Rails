@@ -1,0 +1,31 @@
+<h1>Your Courses</h1>
+
+<h1>You GPA: <%= @gpa %></h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Grade</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @registrations.each do |registration| %>
+      <tr>
+        <td><%= Course.find(registration.c_id).name %></td>
+        <% unless registration.grade.nil? %>
+          <td><%= registration.grade %></td>
+        <% else %>
+          <td>To be declared</td>
+          <td><%= link_to 'Drop Course', registration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to "All Courses", :controller => "courses", :action => "index" %>

@@ -1,0 +1,28 @@
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to 'Back', courses_path %>
+<h2>
+  <strong>Name:</strong>
+  <%= @course.name %>
+</h2>
+
+<h2>
+  <strong>Instructor in-charge:</strong>
+  <%= User.find(@course.admin).name %>
+</h2>
+
+<h2>
+  <strong>Credits:</strong>
+  <%= @course.credits %>
+</h2>
+
+<br>
+
+<% unless @students.nil? %>
+	<h2>List of Students</h2>
+  <ul>
+  	<% @students.each do |student| %>
+  		<li><h3><%= User.find(student.s_id).name %></h3></li>
+  	<% end %>
+<% else %>
+	<h3>No students registered to this course</h3>
+<% end %>
